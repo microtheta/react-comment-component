@@ -61,9 +61,9 @@ var CommentBox = React.createClass({
 
 var CommentList = React.createClass({
 	render: function() {
-		var commentNodes = this.props.commentsList.map(function(cmnts,i) {
+		var commentNodes = this.props.commentsList.map(function(cmnt,i) {
 			return (
-				<Comment key={i} comment={cmnts} />
+				<Comment key={i} comment={cmnt} />
 			);
 		});
 		return (
@@ -78,9 +78,23 @@ var Comment = React.createClass({
 	render: function() {
 		return (
 			<div>
-				{this.props.comment.user}
-				<br/>
-				{this.props.comment.text}
+				<table>
+					<tbody>
+						<tr>
+							<td rowSpan="2"> 
+								<img src={this.props.comment.userimg} style={{'width': '52px', 'maxHeight': '52px', 'margin': '0 10px 5px 0'}} className="img-rounded" />
+							</td>
+							<td>
+								{this.props.comment.user} <small> 2 days ago </small>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								{this.props.comment.text}
+							</td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
 		);
 	}
@@ -96,6 +110,7 @@ var Article = React.createClass({
 			commentsList: [{
 				id:'1',
 				user: 'User Name',
+				userimg: 'userImage.png',
 				text: 'Cmnt Text'
 			}]
 		}
@@ -103,6 +118,7 @@ var Article = React.createClass({
 	handleCommentSubmit: function(cmntTex) {
 		var resp = {
 			user: 'Some User',
+			userimg: 'userImage.png',
 			text: cmntTex
 		};
 		this.state.commentsList.unshift(resp);
